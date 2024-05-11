@@ -1,17 +1,17 @@
 import { useNavigate } from "react-router-dom"
 
-const Punish_Home = () => {
+const Punish_Back = () => {
     const navigate = useNavigate()
     const ToHome = () => {
         navigate('/')
     }
 
-    return (
+    return(
         <>
-            <button onClick={ToHome}>戻る</button>
-            <h1>罰ゲーム</h1>
+            <button onClick={ToHome} type="button">戻る</button>
         </>
+
     )
 }
 
-export default Punish_Home
+export default Punish_Back

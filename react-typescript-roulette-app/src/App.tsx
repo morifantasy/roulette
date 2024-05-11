@@ -1,12 +1,12 @@
 import {Routes, Route} from "react-router-dom"
-import Home from "./mode/Home"
-import Punish_Home from "./mode/punish/Punish_Home"
+import Home_Screen from "./mode/Home_Screen"
+import Punish_Screen from "./mode/punish/Punish_Screen"
 
 const App = () => {
     return (
         <Routes>
-            <Route path="/" element={<Home/>} />
-            <Route path="/punish" element={<Punish_Home/>} />
+            <Route path="/" element={<Home_Screen/>} />
+            <Route path="/punish" element={<Punish_Screen/>} />
         </Routes>
     )
 }
