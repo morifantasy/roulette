@@ -6,7 +6,7 @@ import Punish_Select from "./conponents/Punish_Select"
 import Punish_Table from "./conponents/Punish_Table"
 import Punish_Add from "./conponents/Punish_Add"
 
-import { useState } from "react"
+import { useState, useEffect, useCallback, memo } from "react"
 
 const Punish_Screen = () => {
     let punish_data:string[] = ["1日5000kcal生活", "1日つま先立ち生活", "3日連続これ好き生活", "鑑賞した映画の感想文作成"]
@@ -28,7 +28,7 @@ const Punish_Screen = () => {
         }
     }
 
-    async function SetRouletteFlg(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    function SetRouletteFlg(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
         e.preventDefault()
         {roulette_flg ?
             Roulette_Flg_State(false) :
