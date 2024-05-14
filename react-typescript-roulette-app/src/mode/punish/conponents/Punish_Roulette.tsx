@@ -1,12 +1,12 @@
 type Punish_Roulette_Props = {
-    SetRouletteFlg: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
+    SpinRoulette(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void>
     roulette_flg: boolean
 }
 
 const Punish_Roulette = (props: Punish_Roulette_Props) => {
     return(
         <>
-            <button onClick={props.SetRouletteFlg} type="button">
+            <button onClick={props.SpinRoulette} type="button">
                 {props.roulette_flg ?
                     "止める" :
                     "回す"

@@ -1,9 +1,14 @@
-const Punish_Result = () => {
+type Punish_Result_Props = {
+    punish_result: string
+}
+
+
+const Punish_Result = (props: Punish_Result_Props) => {
     return(
         <form>
             <input type="text"
                 name="punish_result"
-                value="ここに結果を表示"
+                value={props.punish_result}
                 readOnly
             />
         </form>

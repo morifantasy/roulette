@@ -9,9 +9,26 @@ import Punish_Add from "./conponents/Punish_Add"
 import { useState } from "react"
 
 const Punish_Screen = () => {
+    let punish_data:string[] = ["1日5000kcal生活", "1日つま先立ち生活", "3日連続これ好き生活", "鑑賞した映画の感想文作成"]
+
+    const [punish_result, Punish_Result_State] = useState<string>("") 
+
     const [roulette_flg, Roulette_Flg_State] = useState<boolean>(false)
 
-    const SetRouletteFlg = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    async function SpinRoulette (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+        SetRouletteFlg(e)
+
+        for (let i: number = 0; roulette_flg == true ; i++) {
+            if (i >= punish_data.length) {
+                i = 0
+            }
+
+            Punish_Result_State(punish_data[i])
+            await sleep(1000)
+        }
+    }
+
+    async function SetRouletteFlg(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
         e.preventDefault()
         {roulette_flg ?
             Roulette_Flg_State(false) :
@@ -19,12 +36,16 @@ const Punish_Screen = () => {
         }
     }
 
+    function sleep(ms: number): Promise<void> {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
     return (
         <>
             <Punish_Back/>
             <Punish_Title/>
-            <Punish_Result/>
-            <Punish_Roulette SetRouletteFlg={SetRouletteFlg}
+            <Punish_Result punish_result={punish_result}/>
+            <Punish_Roulette SpinRoulette={SpinRoulette}
                 roulette_flg={roulette_flg}
             />
             <Punish_Select/>
