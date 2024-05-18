@@ -11,7 +11,7 @@ import { useState, useEffect, useCallback } from "react"
 const Punish_Screen = () => {
     let punish_data:string[] = ["1日5000kcal生活", "1日つま先立ち生活", "3日連続これ好き生活", "鑑賞した映画の感想文作成"]
 
-    const [index, Result_data_index] = useState<number>(0) 
+    const [result_index, Result_data_index] = useState<number>(0) 
 
     const [roulette_state, Roulette_State] = useState<Roulette_State>("none_roulette")
 
@@ -42,7 +42,7 @@ const Punish_Screen = () => {
             return () => clearInterval(interval)
         }
         else if (roulette_state == "stop_roulette") {
-            {confirm("結果は「" + punish_data[index] + "」でした。\n" + "この罰を一覧から削除しますか？") &&
+            {confirm("結果は「" + punish_data[result_index] + "」でした。\n" + "この罰を一覧から削除しますか？") &&
                 alert("削除しました！")
             }
             SetRouletteState()
@@ -55,7 +55,7 @@ const Punish_Screen = () => {
         <>
             <Punish_Back/>
             <Punish_Title/>
-            <Punish_Result punish_result={punish_data[index]}
+            <Punish_Result punish_result={punish_data[result_index]}
                 roulette_state={roulette_state}
             />
             <Punish_Roulette SetRouletteState={SetRouletteState}

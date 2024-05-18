@@ -7,6 +7,7 @@ const Punish_Delete = (prop: Punish_Delete_Prop) => {
         {confirm("「" + prop.punish_delete_element + "」を削除しますか？") &&
             alert("削除しました！")
         }
+
     }
 
     return(
