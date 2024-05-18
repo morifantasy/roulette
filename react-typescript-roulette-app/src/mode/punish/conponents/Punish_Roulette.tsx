@@ -1,13 +1,15 @@
+import { Roulette_State } from "../Punish_Screen"
+
 type Punish_Roulette_Props = {
-    SpinRoulette(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void>
-    roulette_flg: boolean
+    SetRouletteState: () => void
+    roulette_state: Roulette_State
 }
 
 const Punish_Roulette = (props: Punish_Roulette_Props) => {
     return(
         <>
-            <button onClick={props.SpinRoulette} type="button">
-                {props.roulette_flg ?
+            <button onClick={props.SetRouletteState} type="button">
+                {props.roulette_state == "start_roulette" ?
                     "止める" :
                     "回す"
                 }

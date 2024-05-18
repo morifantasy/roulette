@@ -6,47 +6,60 @@ import Punish_Select from "./conponents/Punish_Select"
 import Punish_Table from "./conponents/Punish_Table"
 import Punish_Add from "./conponents/Punish_Add"
 
-import { useState, useEffect, useCallback, memo } from "react"
+import { useState, useEffect, useCallback } from "react"
 
 const Punish_Screen = () => {
     let punish_data:string[] = ["1日5000kcal生活", "1日つま先立ち生活", "3日連続これ好き生活", "鑑賞した映画の感想文作成"]
 
-    const [punish_result, Punish_Result_State] = useState<string>("") 
+    const [index, Result_data_index] = useState<number>(0) 
 
-    const [roulette_flg, Roulette_Flg_State] = useState<boolean>(false)
+    const [roulette_state, Roulette_State] = useState<Roulette_State>("none_roulette")
 
-    async function SpinRoulette (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-        SetRouletteFlg(e)
-
-        for (let i: number = 0; roulette_flg == true ; i++) {
-            if (i >= punish_data.length) {
-                i = 0
+    const SetRouletteState = useCallback(() => {
+        switch (roulette_state) {
+            case "none_roulette":
+                Roulette_State("start_roulette")
+                break
+            case "start_roulette":
+                Roulette_State("stop_roulette")
+                break
+            case "stop_roulette":
+                Roulette_State("none_roulette")
+                break
+        }
+    }, [roulette_state])
+    
+    useEffect(() => {
+        if (roulette_state == "start_roulette") {
+            const interval = setInterval(() => {
+                Result_data_index(
+                    (oldIndex) => {
+                        if (oldIndex < punish_data.length - 1) return oldIndex + 1;
+                        return 0;
+                    }
+                )
+            }, 50)
+            return () => clearInterval(interval)
+        }
+        else if (roulette_state == "stop_roulette") {
+            {confirm("結果は「" + punish_data[index] + "」でした。\n" + "この罰を一覧から削除しますか？") &&
+                alert("削除しました！")
             }
-
-            Punish_Result_State(punish_data[i])
-            await sleep(1000)
+            SetRouletteState()
         }
-    }
-
-    function SetRouletteFlg(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-        e.preventDefault()
-        {roulette_flg ?
-            Roulette_Flg_State(false) :
-            Roulette_Flg_State(true)
+        else if (roulette_state == "none_roulette") {
         }
-    }
-
-    function sleep(ms: number): Promise<void> {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
+    }, [roulette_state])
 
     return (
         <>
             <Punish_Back/>
             <Punish_Title/>
-            <Punish_Result punish_result={punish_result}/>
-            <Punish_Roulette SpinRoulette={SpinRoulette}
-                roulette_flg={roulette_flg}
+            <Punish_Result punish_result={punish_data[index]}
+                roulette_state={roulette_state}
+            />
+            <Punish_Roulette SetRouletteState={SetRouletteState}
+                roulette_state={roulette_state}
             />
             <Punish_Select/>
             <Punish_Table punish_table_element={["1日5000kcal生活", "1日つま先立ち生活", "3日連続これ好き生活", "鑑賞した映画の感想文作成"]}/>
@@ -56,3 +69,4 @@ const Punish_Screen = () => {
 }
 
 export default Punish_Screen
+export type Roulette_State = "none_roulette" | "start_roulette" | "stop_roulette"
