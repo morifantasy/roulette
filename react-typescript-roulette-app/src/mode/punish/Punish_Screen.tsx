@@ -9,7 +9,15 @@ import Punish_Add from "./conponents/Punish_Add"
 import { useState, useEffect, useCallback } from "react"
 
 const Punish_Screen = () => {
-    let punish_data:string[] = ["1日5000kcal生活", "1日つま先立ち生活", "3日連続これ好き生活", "鑑賞した映画の感想文作成"]
+    const [punish_list, setPunishdata] = useState<string[]>(["1日5000kcal生活", "1日つま先立ち生活"])
+    
+    const [punish_data, setPunish] = useState<string>("")
+
+    const AddPunishdData = (e: any) =>{
+        e.preventDefault()
+        setPunishdata([...punish_list, punish_data])
+    }
+    console.log(punish_list)
 
     const [result_index, Result_data_index] = useState<number>(0) 
 
@@ -34,7 +42,7 @@ const Punish_Screen = () => {
             const interval = setInterval(() => {
                 Result_data_index(
                     (oldIndex) => {
-                        if (oldIndex < punish_data.length - 1) return oldIndex + 1;
+                        if (oldIndex < punish_list.length - 1) return oldIndex + 1;
                         return 0;
                     }
                 )
@@ -42,7 +50,7 @@ const Punish_Screen = () => {
             return () => clearInterval(interval)
         }
         else if (roulette_state == "stop_roulette") {
-            {confirm("結果は「" + punish_data[result_index] + "」でした。\n" + "この罰を一覧から削除しますか？") &&
+            {confirm("結果は「" + punish_list[result_index] + "」でした。\n" + "この罰を一覧から削除しますか？") &&
                 alert("削除しました！")
             }
             SetRouletteState()
@@ -51,19 +59,21 @@ const Punish_Screen = () => {
         }
     }, [roulette_state])
 
+    
+
     return (
         <>
             <Punish_Back/>
             <Punish_Title/>
-            <Punish_Result punish_result={punish_data[result_index]}
+            <Punish_Result punish_result={punish_list[result_index]}
                 roulette_state={roulette_state}
             />
             <Punish_Roulette SetRouletteState={SetRouletteState}
                 roulette_state={roulette_state}
             />
             <Punish_Select/>
-            <Punish_Table punish_table_element={["1日5000kcal生活", "1日つま先立ち生活", "3日連続これ好き生活", "鑑賞した映画の感想文作成"]}/>
-            <Punish_Add/>
+            <Punish_Table punish_table_element={[punish_list[0], punish_list[1], punish_list[2], punish_list[3]]}/>
+            <Punish_Add setPunish={setPunish} AddPunishdData={AddPunishdData}/>
         </>
     )
 }
