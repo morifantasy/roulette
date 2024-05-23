@@ -9,22 +9,22 @@ import Punish_Add from "./conponents/Punish_Add"
 import { useState, useEffect, useCallback } from "react"
 
 const Punish_Screen = () => {
-    let punish_data:string[] = ["1日5000kcal生活", "1日つま先立ち生活", "3日連続これ好き生活", "鑑賞した映画の感想文作成"]
+    const [punish_list, Set_Punish_List] = useState<string[]>(["1日5000kcal生活", "1日つま先立ち生活", "3日連続これ好き生活", "鑑賞した映画の感想文作成"])
 
-    const [index, Result_data_index] = useState<number>(0) 
+    const [result_index, Set_Result_Index] = useState<number>(0) 
 
-    const [roulette_state, Roulette_State] = useState<Roulette_State>("none_roulette")
+    const [roulette_state, Set_Roulette_State] = useState<Roulette_State>("none_roulette")
 
-    const SetRouletteState = useCallback(() => {
+    const ChangeRouletteState = useCallback(() => {
         switch (roulette_state) {
             case "none_roulette":
-                Roulette_State("start_roulette")
+                Set_Roulette_State("start_roulette")
                 break
             case "start_roulette":
-                Roulette_State("stop_roulette")
+                Set_Roulette_State("stop_roulette")
                 break
             case "stop_roulette":
-                Roulette_State("none_roulette")
+                Set_Roulette_State("none_roulette")
                 break
         }
     }, [roulette_state])
@@ -32,9 +32,9 @@ const Punish_Screen = () => {
     useEffect(() => {
         if (roulette_state == "start_roulette") {
             const interval = setInterval(() => {
-                Result_data_index(
+                Set_Result_Index(
                     (oldIndex) => {
-                        if (oldIndex < punish_data.length - 1) return oldIndex + 1;
+                        if (oldIndex < punish_list.length - 1) return oldIndex + 1;
                         return 0;
                     }
                 )
@@ -42,10 +42,10 @@ const Punish_Screen = () => {
             return () => clearInterval(interval)
         }
         else if (roulette_state == "stop_roulette") {
-            {confirm("結果は「" + punish_data[index] + "」でした。\n" + "この罰を一覧から削除しますか？") &&
+            {confirm("結果は「" + punish_list[result_index] + "」でした。\n" + "この罰を一覧から削除しますか？") &&
                 alert("削除しました！")
             }
-            SetRouletteState()
+            ChangeRouletteState()
         }
         else if (roulette_state == "none_roulette") {
         }
@@ -55,14 +55,14 @@ const Punish_Screen = () => {
         <>
             <Punish_Back/>
             <Punish_Title/>
-            <Punish_Result punish_result={punish_data[index]}
+            <Punish_Result punish_result={punish_list[result_index]}
                 roulette_state={roulette_state}
             />
-            <Punish_Roulette SetRouletteState={SetRouletteState}
+            <Punish_Roulette ChangeRouletteState={ChangeRouletteState}
                 roulette_state={roulette_state}
             />
             <Punish_Select/>
-            <Punish_Table punish_table_element={["1日5000kcal生活", "1日つま先立ち生活", "3日連続これ好き生活", "鑑賞した映画の感想文作成"]}/>
+            <Punish_Table punish_table_element={[punish_list[0], punish_list[1], punish_list[2], punish_list[3]]}/>
             <Punish_Add/>
         </>
     )

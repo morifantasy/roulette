@@ -1,0 +1,73 @@
+<mxfile host="65bd71144e">
+    <diagram id="vdkNY8fpkA-Tb5728e8B" name="ページ1">
+        <mxGraphModel dx="116" dy="599" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="" style="whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0000FF;" vertex="1" parent="1">
+                    <mxGeometry x="220" y="30" width="920" height="690" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="戻る" style="whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0000FF;fontColor=#000000;fontSize=21;" vertex="1" parent="1">
+                    <mxGeometry x="250" y="60" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="罰ゲーム" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;fontColor=#000000;" vertex="1" parent="1">
+                    <mxGeometry x="600" y="50" width="160" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="" style="whiteSpace=wrap;html=1;strokeColor=#0000FF;fontSize=24;fontColor=#000000;fillColor=#FFFFFF;" vertex="1" parent="1">
+                    <mxGeometry x="420" y="120" width="520" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="回す" style="whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0000FF;fontColor=#000000;fontSize=21;" vertex="1" parent="1">
+                    <mxGeometry x="635" y="190" width="90" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" value="" style="group" vertex="1" connectable="0" parent="1">
+                    <mxGeometry x="370" y="300" width="620" height="300" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="罰ゲーム" style="whiteSpace=wrap;html=1;strokeColor=#0000FF;fontSize=24;fontColor=#FFFFFF;fillColor=#000099;fontStyle=1" vertex="1" parent="16">
+                    <mxGeometry width="620" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="1日5000kcal生活" style="whiteSpace=wrap;html=1;strokeColor=#0000FF;fontSize=24;fontColor=#000000;fillColor=#FFFFFF;" vertex="1" parent="16">
+                    <mxGeometry y="60" width="620" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="映画鑑賞して感想文書く" style="whiteSpace=wrap;html=1;strokeColor=#0000FF;fontSize=24;fontColor=#000000;fillColor=#FFFFFF;" vertex="1" parent="16">
+                    <mxGeometry y="240" width="620" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="1日つま先立ち生活" style="whiteSpace=wrap;html=1;strokeColor=#0000FF;fontSize=24;fontColor=#000000;fillColor=#FFFFFF;" vertex="1" parent="16">
+                    <mxGeometry y="120" width="620" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="3日連続これ好き生活" style="whiteSpace=wrap;html=1;strokeColor=#0000FF;fontSize=24;fontColor=#000000;fillColor=#FFFFFF;" vertex="1" parent="16">
+                    <mxGeometry y="180" width="620" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="17" value="" style="group" vertex="1" connectable="0" parent="1">
+                    <mxGeometry x="920" y="220" width="140" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="▲" style="whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0000FF;fontColor=#000000;fontSize=40;" vertex="1" parent="17">
+                    <mxGeometry width="60" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="▼" style="whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0000FF;fontColor=#000000;fontSize=40;" vertex="1" parent="17">
+                    <mxGeometry x="80" width="60" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="18" value="削除" style="whiteSpace=wrap;html=1;fillColor=#000099;strokeColor=#0000FF;fontColor=#FFFFFF;fontSize=21;" vertex="1" parent="1">
+                    <mxGeometry x="1000" y="370" width="80" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="19" value="削除" style="whiteSpace=wrap;html=1;fillColor=#000099;strokeColor=#0000FF;fontColor=#FFFFFF;fontSize=21;" vertex="1" parent="1">
+                    <mxGeometry x="1000" y="430" width="80" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="20" value="削除" style="whiteSpace=wrap;html=1;fillColor=#000099;strokeColor=#0000FF;fontColor=#FFFFFF;fontSize=21;" vertex="1" parent="1">
+                    <mxGeometry x="1000" y="490" width="80" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="21" value="削除" style="whiteSpace=wrap;html=1;fillColor=#000099;strokeColor=#0000FF;fontColor=#FFFFFF;fontSize=21;" vertex="1" parent="1">
+                    <mxGeometry x="1000" y="550" width="80" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="24" value="" style="group" vertex="1" connectable="0" parent="1">
+                    <mxGeometry x="320" y="630" width="770" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="22" value="" style="whiteSpace=wrap;html=1;strokeColor=#0000FF;fontSize=24;fontColor=#000000;fillColor=#FFFFFF;" vertex="1" parent="24">
+                    <mxGeometry width="672.3943661971832" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="23" value="追加" style="whiteSpace=wrap;html=1;fillColor=#000099;strokeColor=#0000FF;fontColor=#FFFFFF;fontSize=21;" vertex="1" parent="24">
+                    <mxGeometry x="672.3943661971832" width="97.60563380281691" height="60" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
