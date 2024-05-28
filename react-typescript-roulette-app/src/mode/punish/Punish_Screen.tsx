@@ -5,13 +5,20 @@ import Punish_Roulette from "./conponents/Punish_Roulette"
 import Punish_Select from "./conponents/Punish_Select"
 import Punish_Table from "./conponents/Punish_Table"
 import Punish_Add from "./conponents/Punish_Add"
+import db from "../../firebase"
 
 import { useState, useEffect, useCallback } from "react"
 
 const Punish_Screen = () => {
-    const [punish_list, Set_Punish_List] = useState<string[]>(["1日5000kcal生活", "1日つま先立ち生活", "3日連続これ好き生活", "鑑賞した映画の感想文作成"])
+    const [punish_list, Set_Punish_List] = useState<string[]>(["1日5000kcal生活", "1日つま先立ち生活", "3日連続これ好き生活", "映画見て感想文書く"])
 
-    const [result_index, Set_Result_Index] = useState<number>(0) 
+    const [new_punish_data, Set_New_Punish_Data] = useState<string>("")
+
+    const [delete_punish_data, Set_Delete_Punish_Data] = useState<string>("")
+
+    const [table_index, Set_Table_Index] = useState<number>(0)
+
+    const [result_index, Set_Result_Index] = useState<number>(0)
 
     const [roulette_state, Set_Roulette_State] = useState<Roulette_State>("none_roulette")
 
@@ -28,6 +35,42 @@ const Punish_Screen = () => {
                 break
         }
     }, [roulette_state])
+
+    const AddPunishData = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        Set_Punish_List([...punish_list, new_punish_data])
+        Set_New_Punish_Data("")
+    }
+
+    const UpPunishTable = () => {
+        if (table_index > 0) {
+            Set_Table_Index(table_index - 1)
+        }
+        else {
+            Set_Table_Index(0)
+        }
+    }
+
+    const DownPunishTable = () => {
+        if (table_index < punish_list.length - 4) {
+            Set_Table_Index(table_index + 1)
+        }
+        else {
+            Set_Table_Index(punish_list.length - 4)
+        }
+    }
+
+    useEffect(() => {
+        Set_Punish_List(
+            punish_list.filter((punish_list, index) => (punish_list != delete_punish_data))
+        )
+    }, [delete_punish_data])
+
+    useEffect(() => {
+        if (table_index >= punish_list.length - 4 && punish_list.length > 4) {
+            Set_Table_Index(punish_list.length - 4)
+        }
+    }, [punish_list])
     
     useEffect(() => {
         if (roulette_state == "start_roulette") {
@@ -38,11 +81,12 @@ const Punish_Screen = () => {
                         return 0;
                     }
                 )
-            }, 50)
+            }, 70)
             return () => clearInterval(interval)
         }
         else if (roulette_state == "stop_roulette") {
-            {confirm("結果は「" + punish_list[result_index] + "」でした。\n" + "この罰を一覧から削除しますか？") &&
+            if (confirm("結果は「" + punish_list[result_index] + "」でした。\n" + "この罰を一覧から削除しますか？")) {
+                Set_Delete_Punish_Data(punish_list[result_index])
                 alert("削除しました！")
             }
             ChangeRouletteState()
@@ -61,9 +105,15 @@ const Punish_Screen = () => {
             <Punish_Roulette ChangeRouletteState={ChangeRouletteState}
                 roulette_state={roulette_state}
             />
-            <Punish_Select/>
-            <Punish_Table punish_table_element={[punish_list[0], punish_list[1], punish_list[2], punish_list[3]]}/>
-            <Punish_Add/>
+            <Punish_Select UpPunishTable={UpPunishTable}
+                DownPunishTable={DownPunishTable}
+            />
+            <Punish_Table punish_table_list={punish_list.slice(table_index, table_index + Math.min(punish_list.length, 4))}
+                Set_Delete_Punish_Data={Set_Delete_Punish_Data}/>
+            <Punish_Add new_punish_data={new_punish_data}
+                Set_New_Punish_Data={Set_New_Punish_Data}
+                AddPunishData={AddPunishData}
+            />
         </>
     )
 }
