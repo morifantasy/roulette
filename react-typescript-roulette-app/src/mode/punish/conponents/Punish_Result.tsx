@@ -11,6 +11,7 @@ const Punish_Result = (props: Punish_Result_Props) => {
         <form>
             <input type="text"
                 name="punish_result"
+                placeholder="ここに結果を表示"
                 value={props.roulette_state == "none_roulette" ?
                     "ここに結果を表示" :
                     props.punish_result}
