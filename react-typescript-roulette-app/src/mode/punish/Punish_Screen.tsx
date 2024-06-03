@@ -8,9 +8,12 @@ import Punish_Add from "./conponents/Punish_Add"
 import db from "../../firebase"
 
 import { useState, useEffect, useCallback } from "react"
+import { arrayRemove, arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore"
 
 const Punish_Screen = () => {
-    const [punish_list, Set_Punish_List] = useState<string[]>(["1日5000kcal生活", "1日つま先立ち生活", "3日連続これ好き生活", "映画見て感想文書く"])
+    const docRef = doc(db, "roulette_parameter", "punish_list")
+
+    const [punish_list, Set_Punish_List] = useState<string[]>([])
 
     const [new_punish_data, Set_New_Punish_Data] = useState<string>("")
 
@@ -39,6 +42,7 @@ const Punish_Screen = () => {
     const AddPunishData = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         Set_Punish_List([...punish_list, new_punish_data])
+        updateDoc(docRef, {punish_list: arrayUnion(new_punish_data)})
         Set_New_Punish_Data("")
     }
 
@@ -52,7 +56,10 @@ const Punish_Screen = () => {
     }
 
     const DownPunishTable = () => {
-        if (table_index < punish_list.length - 4) {
+        if (punish_list.length < 4) {
+            Set_Table_Index(0)
+        }
+        else if (table_index < punish_list.length - 4) {
             Set_Table_Index(table_index + 1)
         }
         else {
@@ -61,9 +68,17 @@ const Punish_Screen = () => {
     }
 
     useEffect(() => {
+        getDoc(docRef).then((snapshot) => {
+            Set_Punish_List(snapshot.data().punish_list)
+            console.log(punish_list)
+        })
+    }, [])
+
+    useEffect(() => {
         Set_Punish_List(
             punish_list.filter((punish_list, index) => (punish_list != delete_punish_data))
         )
+        updateDoc(docRef, {punish_list: arrayRemove(delete_punish_data)})
     }, [delete_punish_data])
 
     useEffect(() => {
