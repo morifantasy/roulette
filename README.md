@@ -45,5 +45,13 @@ TypeScript
 * ポイントのたまった人のルーレットボタンのみ押下可能にする
 
 ```plantuml
+@startuml
 
+state "森" as mori
+state "奥田" as okuda
+
+mori -> okuda : しばく
+okuda -> mori : しばきかえす
+
+@enduml
 ```
