@@ -69,14 +69,14 @@ const Punish_Screen = () => {
 
     useEffect(() => {
         getDoc(docRef).then((snapshot) => {
-            Set_Punish_List(snapshot.data().punish_list)
+            Set_Punish_List((snapshot.data() as any).punish_list as string[])
             console.log(punish_list)
         })
     }, [])
 
     useEffect(() => {
         Set_Punish_List(
-            punish_list.filter((punish_list, index) => (punish_list != delete_punish_data))
+            punish_list.filter((punish_list) => (punish_list != delete_punish_data))
         )
         updateDoc(docRef, {punish_list: arrayRemove(delete_punish_data)})
     }, [delete_punish_data])
